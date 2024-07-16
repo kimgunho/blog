@@ -1,0 +1,26 @@
+@import '@/styles/common.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  gap: 6.25rem;
+
+  > .title {
+    color: #333;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  > .nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    > a {
+      text-transform: capitalize;
+      font-size: 1rem;
+      color: #666;
+    }
+  }
+}
