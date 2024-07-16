@@ -1,7 +1,12 @@
 import React from 'react';
 
-const Home: React.FC = () => {
+import GlobalLayout from '@/components/global/GlobalLayout';
+import { NextPageWithLayout } from '@/types/nextLayoutWithPage';
+
+const Home: NextPageWithLayout = () => {
   return <main>aa</main>;
 };
+
+Home.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default Home;

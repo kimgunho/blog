@@ -1,11 +1,11 @@
-import "@/styles/reset.scss";
-import type { AppProps } from "next/app";
-import { Noto_Sans_KR } from "next/font/google";
-import Head from "next/head";
+import Head from 'next/head';
+import '@/styles/reset.scss';
 
-const font = Noto_Sans_KR({ subsets: ["latin"] });
+import { AppPropsWithLayout } from '@/types/nextLayoutWithPage';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout || ((page) => page);
+
   return (
     <>
       <Head>
@@ -14,9 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={font.className}>
-        <Component {...pageProps} />
-      </div>
+      {getLayout(<Component {...pageProps} />)}
     </>
   );
 }

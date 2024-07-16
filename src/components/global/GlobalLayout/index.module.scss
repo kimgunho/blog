@@ -1,0 +1,19 @@
+@import '@/styles/common.scss';
+
+.container {
+  > .wrapper {
+    display: flex;
+    gap: 1rem;
+    min-height: calc(100vh - 200px);
+
+    > main {
+      flex: 1;
+    }
+  }
+  > .footer {
+    border-top: 1px solid #ddd;
+    padding: 1rem;
+    text-align: center;
+    color: #666;
+  }
+}
