@@ -7,7 +7,12 @@ import { TagType } from '@/types/notion';
 export const notion = new NotionAPI();
 
 export const getData = async (pageId: string) => {
-  return await notion.getPage(pageId);
+  try {
+    const data = await notion.getPage(pageId);
+    return data;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const client = new Client({

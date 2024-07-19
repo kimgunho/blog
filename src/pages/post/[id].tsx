@@ -5,8 +5,7 @@ import 'react-notion-x/src/styles.css';
 
 import GlobalLayout from '@/components/global/GlobalLayout';
 import { NextPageWithLayout } from '@/types/nextLayoutWithPage';
-import { getData } from '../lib/notion';
-import { useState } from 'react';
+import { getData } from '@/lib/notion';
 
 interface RendererProps {
   recordMap: ExtendedRecordMap;
@@ -37,9 +36,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const Detail: NextPageWithLayout<RendererProps> = ({ recordMap, id }) => {
-  const [isDark, setDart] = useState(false);
+  // const [isDark, setDart] = useState(false);
+  if (!recordMap) {
+    return <div>존재하지않는 페이지</div>;
+  }
 
-  return <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={isDark} rootPageId={id} previewImages />;
+  return <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} rootPageId={id} previewImages />;
 };
 
 Detail.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;

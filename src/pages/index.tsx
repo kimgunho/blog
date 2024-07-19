@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import GlobalLayout from '@/components/global/GlobalLayout';
 import { NextPageWithLayout } from '@/types/nextLayoutWithPage';
 import { DatabaseItemType, TagType } from '@/types/notion';
-import { database, getTags } from './lib/notion';
+import { database, getTags } from '@/lib/notion';
 import styles from './index.module.scss';
 import Link from 'next/link';
 
