@@ -7,6 +7,7 @@ import { NextPageWithLayout } from '@/types/nextLayoutWithPage';
 import { DatabaseItemType, TagType } from '@/types/notion';
 import { database, getTags } from './lib/notion';
 import styles from './index.module.scss';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -55,11 +56,15 @@ const Home: NextPageWithLayout<Props> = ({ db, tags }) => {
           );
         })}
       </aside>
+
+      {posts.length === 0 && <p>데이터가 존재하지않습니다.</p>}
       <ul className={cx('posts')}>
         {posts.map((data) => {
           return (
             <li key={data.id}>
-              <strong>{data.properties.title.title[0].plain_text}</strong>
+              <Link href={`/post/${data.id}`}>
+                <strong>{data.properties.title.title[0].plain_text}</strong>
+              </Link>
             </li>
           );
         })}
