@@ -2,7 +2,7 @@ import { NotionAPI } from 'notion-client';
 import { Client } from '@notionhq/client';
 import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
-import { TagType } from './type';
+import { TagType } from '@/types/notion';
 
 export const notion = new NotionAPI();
 
@@ -10,19 +10,13 @@ export const getData = async (pageId: string) => {
   return await notion.getPage(pageId);
 };
 
-const client = new Client({
+export const client = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
 export const database = async () => {
   const response = await client.databases.query({
     database_id: process.env.NOTION_DATABASE_ID as string,
-    // filter: {
-    //   property: 'tags',
-    //   multi_select: {
-    //     contains: 'Docs',
-    //   },
-    // },
   });
 
   return response.results as DatabaseObjectResponse[];
