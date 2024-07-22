@@ -1,6 +1,22 @@
 @import '@/styles/common.scss';
 
 .container {
+  > .goBack {
+    position: fixed;
+    right: 3.75rem;
+    bottom: 3.75rem;
+    z-index: 999;
+    width: 3.75rem;
+    height: 3.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+  }
   > .wrapper {
     height: calc(100vh - 7.5rem);
   }
