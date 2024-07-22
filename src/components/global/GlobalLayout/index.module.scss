@@ -2,12 +2,23 @@
 
 .container {
   > .wrapper {
-    min-height: calc(100vh - 7.5rem);
+    height: calc(100vh - 7.5rem);
   }
   > .footer {
     border-top: 1px solid #ddd;
     padding: 1rem;
-    text-align: center;
-    color: #666;
+
+    > .copyright {
+      color: #666;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+
+      > a {
+        line-height: 0;
+      }
+    }
   }
 }

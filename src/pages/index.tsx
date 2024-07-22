@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
 import classNames from 'classnames/bind';
 
 import GlobalLayout from '@/components/global/GlobalLayout';
+import Card from '@/components/ui/Card';
+import useStorage from '@/hook/useStorage';
+import { database, getTags } from '@/lib/notion';
 import { NextPageWithLayout } from '@/types/nextLayoutWithPage';
 import { DatabaseItemType, TagType } from '@/types/notion';
-import { database, getTags } from '@/lib/notion';
 import styles from './index.module.scss';
-import Link from 'next/link';
 
 const cx = classNames.bind(styles);
-
+const Tag = dynamic(() => import('@/components/ui/Tag'), { ssr: false });
 interface Props {
   db: DatabaseItemType[];
   tags: TagType[];
@@ -29,46 +31,39 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home: NextPageWithLayout<Props> = ({ db, tags }) => {
-  const [posts, setPosts] = useState(db);
+  const [posts, setPosts] = useState<DatabaseItemType[]>(db);
+  const [curTag, setCurTag] = useStorage('@tag', 'all');
 
-  const filterPostsByTag = (e: React.MouseEvent) => {
-    const target = e.target as HTMLButtonElement;
-    const tag = target.dataset.query as string;
-
+  useEffect(() => {
     let _db = db;
-    if (tag !== 'all') {
-      _db = _db.filter((post) => post.properties.tags.multi_select.some(({ name }) => name.includes(tag)));
+    if (curTag !== 'all') {
+      _db = _db.filter((post) => post.properties.tags.multi_select.some(({ name }) => name.includes(curTag)));
     }
     setPosts(_db);
+  }, [curTag, db]);
+
+  const select = (e: React.MouseEvent) => {
+    const target = e.target as HTMLButtonElement;
+    const tag = target.dataset.query as string;
+    setCurTag(tag);
   };
 
   return (
     <div className={cx('container')}>
       <aside className={cx('tags')}>
-        <button data-query="all" onClick={filterPostsByTag} type="button">
-          All
-        </button>
+        <Tag onClick={select} tag="all" active={curTag === 'all'} />
         {tags.map((tag) => {
-          return (
-            <button data-query={tag.name} onClick={filterPostsByTag} type="button" key={tag.id}>
-              {tag.name}
-            </button>
-          );
+          return <Tag key={tag.id} onClick={select} tag={tag.name} active={tag.name === curTag} />;
         })}
       </aside>
-
-      {posts.length === 0 && <p>데이터가 존재하지않습니다.</p>}
-      <ul className={cx('posts')}>
-        {posts.map((data) => {
-          return (
-            <li key={data.id}>
-              <Link href={`/post/${data.id}`}>
-                <strong>{data.properties.title.title[0].plain_text}</strong>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className={cx('contents')}>
+        {posts.length === 0 && <p className={cx('empty')}>데이터가 존재하지않습니다.</p>}
+        <div className={cx('posts')}>
+          {posts.map((data) => {
+            return <Card key={data.id} data={data} />;
+          })}
+        </div>
+      </div>
     </div>
   );
 };

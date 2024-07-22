@@ -6,6 +6,9 @@ const CONFIG = {
     about: '/about',
     portfolio: '/portfolio',
   },
+  git: {
+    url: 'https://github.com/kimgunho',
+  },
 };
 
 export default Object.freeze(CONFIG);

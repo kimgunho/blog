@@ -58,7 +58,9 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
   color: currentColor;
 }
-
+p {
+  margin: 0;
+}
 img,
 picture {
   max-width: 100%;

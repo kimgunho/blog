@@ -1,0 +1,26 @@
+.container {
+  max-width: 640px;
+  border-bottom: 1px solid #ddd;
+  padding: 12px 0 20px 0;
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  > .title {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 1.125rem;
+    display: block;
+  }
+  > .summary {
+    font-size: 1rem;
+    color: #666;
+  }
+  > .updated {
+    text-align: right;
+    color: #666;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+  }
+}

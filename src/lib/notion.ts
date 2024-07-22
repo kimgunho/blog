@@ -22,6 +22,22 @@ export const client = new Client({
 export const database = async () => {
   const response = await client.databases.query({
     database_id: process.env.NOTION_DATABASE_ID as string,
+    filter: {
+      and: [
+        {
+          property: 'type',
+          select: {
+            equals: 'Post',
+          },
+        },
+        {
+          property: 'status',
+          select: {
+            equals: 'Public',
+          },
+        },
+      ],
+    },
   });
 
   return response.results as DatabaseObjectResponse[];

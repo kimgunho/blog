@@ -78,7 +78,7 @@ export interface PropertiesType {
         code: boolean;
         color: string;
       };
-      plain_text: string;
+      plain_text?: string;
       href: null;
     }[];
   };
