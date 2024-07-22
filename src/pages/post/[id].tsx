@@ -1,13 +1,12 @@
+import dynamic from 'next/dynamic';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import { NotionRenderer } from 'react-notion-x';
 import { ExtendedRecordMap } from 'notion-types';
-import 'react-notion-x/src/styles.css';
 
 import GlobalLayout from '@/components/global/GlobalLayout';
 import { NextPageWithLayout } from '@/types/nextLayoutWithPage';
 import { getData } from '@/lib/notion';
 
-interface RendererProps {
+interface Props {
   recordMap: ExtendedRecordMap;
   id: string;
 }
@@ -35,13 +34,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-const Detail: NextPageWithLayout<RendererProps> = ({ recordMap, id }) => {
-  // const [isDark, setDart] = useState(false);
-  if (!recordMap) {
-    return <div>존재하지않는 페이지</div>;
-  }
-
-  return <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} rootPageId={id} previewImages />;
+const Notion = dynamic(() => import('@/components/global/NotionRender'), { ssr: false });
+const Detail: NextPageWithLayout<Props> = ({ recordMap, id }) => {
+  return <Notion recordMap={recordMap} id={id} />;
 };
 
 Detail.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;

@@ -3,12 +3,12 @@
   border: 0;
   text-align: left;
   font-size: 1rem;
-  color: #333;
+  color: var(--color-text-02);
   text-transform: capitalize;
   cursor: pointer;
 
   &.active {
-    color: black;
+    color: var(--color-text-01);
     font-weight: 600;
   }
 }

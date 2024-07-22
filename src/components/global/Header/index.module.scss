@@ -1,15 +1,14 @@
-@import '@/styles/common.scss';
-
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-border);
   gap: 6.25rem;
+  background-color: var(--color-background);
 
   > .title {
-    color: #333;
+    color: var(--color-text-01);
     font-weight: 600;
     text-transform: capitalize;
   }
@@ -17,10 +16,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    > .button {
+      line-height: 0;
+    }
     > a {
       text-transform: capitalize;
       font-size: 1rem;
-      color: #666;
+      color: var(--color-text-02);
     }
   }
 }

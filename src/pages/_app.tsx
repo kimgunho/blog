@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import '@/styles/colors.scss';
 import '@/styles/reset.scss';
 
 import { AppPropsWithLayout } from '@/types/nextLayoutWithPage';

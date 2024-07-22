@@ -1,13 +1,13 @@
 .container {
   max-width: 640px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-border);
   padding: 12px 0 20px 0;
   &:last-of-type {
     border-bottom: 0;
   }
 
   > .title {
-    color: #333;
+    color: var(--color-text-02);
     font-weight: 600;
     margin-bottom: 6px;
     font-size: 1.125rem;
@@ -15,11 +15,11 @@
   }
   > .summary {
     font-size: 1rem;
-    color: #666;
+    color: var(--color-text-02);
   }
   > .updated {
     text-align: right;
-    color: #666;
+    color: var(--color-text-02);
     font-size: 0.875rem;
     margin-top: 0.75rem;
   }
