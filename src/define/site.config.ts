@@ -1,6 +1,7 @@
 const CONFIG = {
   header: {
     title: 'kimgunho.blog',
+    description: 'for study and history',
   },
   paths: {
     about: '/about',

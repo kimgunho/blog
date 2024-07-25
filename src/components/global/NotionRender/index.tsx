@@ -45,14 +45,16 @@ const NotionRender: React.FC<Props> = ({ recordMap, id }) => {
   };
 
   return (
-    <NotionRenderer
-      components={components}
-      recordMap={recordMap}
-      fullPage={true}
-      darkMode={theme === 'dark'}
-      rootPageId={id}
-      previewImages
-    />
+    <>
+      <NotionRenderer
+        components={components}
+        recordMap={recordMap}
+        fullPage={true}
+        darkMode={theme === 'dark'}
+        rootPageId={id}
+        previewImages
+      />
+    </>
   );
 };
 

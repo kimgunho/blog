@@ -1,5 +1,6 @@
 import { NotionAPI } from 'notion-client';
 import { Client } from '@notionhq/client';
+import { getPageProperty, getPageTitle } from 'notion-utils';
 import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import { TagType } from '@/types/notion';
@@ -8,8 +9,16 @@ export const notion = new NotionAPI();
 
 export const getData = async (pageId: string) => {
   try {
-    const data = await notion.getPage(pageId);
-    return data;
+    const recordMap = await notion.getPage(pageId);
+    const block = recordMap.block[pageId].value;
+    const title = getPageTitle(recordMap);
+    const summary = getPageProperty('summary', block, recordMap);
+
+    return {
+      title,
+      summary,
+      recordMap,
+    };
   } catch (error) {
     return null;
   }

@@ -1,24 +1,25 @@
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import classNames from 'classnames/bind';
 
 import GlobalLayout from '@/components/global/GlobalLayout';
 import Card from '@/components/ui/Card';
+import Seo from '@/components/global/Seo';
 import useStorage from '@/hook/useStorage';
+import CONFIG from '@/define/site.config';
 import { database, getTags } from '@/lib/notion';
 import { NextPageWithLayout } from '@/types/nextLayoutWithPage';
 import { DatabaseItemType, TagType } from '@/types/notion';
 import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
-const Tag = dynamic(() => import('@/components/ui/Tag'), { ssr: false });
 interface Props {
   db: DatabaseItemType[];
   tags: TagType[];
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const db = await database();
   const tags = await getTags();
 
@@ -30,6 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+const Tag = dynamic(() => import('@/components/ui/Tag'), { ssr: false });
 const Home: NextPageWithLayout<Props> = ({ db, tags }) => {
   const [posts, setPosts] = useState<DatabaseItemType[]>(db);
   const [curTag, setCurTag] = useStorage('@tag', 'all');
@@ -49,22 +51,25 @@ const Home: NextPageWithLayout<Props> = ({ db, tags }) => {
   };
 
   return (
-    <div className={cx('container')}>
-      <aside className={cx('tags')}>
-        <Tag onClick={select} tag="all" active={curTag === 'all'} />
-        {tags.map((tag) => {
-          return <Tag key={tag.id} onClick={select} tag={tag.name} active={tag.name === curTag} />;
-        })}
-      </aside>
-      <div className={cx('contents')}>
-        {posts.length === 0 && <p className={cx('empty')}>데이터가 존재하지않습니다.</p>}
-        <div className={cx('posts')}>
-          {posts.map((data) => {
-            return <Card key={data.id} data={data} />;
+    <>
+      <Seo title={CONFIG.header.title} description={CONFIG.header.description} />
+      <div className={cx('container')}>
+        <aside className={cx('tags')}>
+          <Tag onClick={select} tag="all" active={curTag === 'all'} />
+          {tags.map((tag) => {
+            return <Tag key={tag.id} onClick={select} tag={tag.name} active={tag.name === curTag} />;
           })}
+        </aside>
+        <div className={cx('contents')}>
+          {posts.length === 0 && <p className={cx('empty')}>데이터가 존재하지않습니다.</p>}
+          <div className={cx('posts')}>
+            {posts.map((data) => {
+              return <Card key={data.id} data={data} />;
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
