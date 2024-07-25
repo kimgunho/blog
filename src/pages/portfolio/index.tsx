@@ -16,6 +16,20 @@ interface Props {
   id: string;
 }
 
+const Notion = dynamic(() => import('@/components/global/NotionRender'), { ssr: false });
+const Portfolio: NextPageWithLayout<Props> = ({ data, id }) => {
+  return (
+    <>
+      <Seo title={data.title} description={data.summary} />
+      <Notion recordMap={data.recordMap} id={id} />
+    </>
+  );
+};
+
+Portfolio.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;
+
+export default Portfolio;
+
 export const getServerSideProps: GetServerSideProps = async () => {
   const id = process.env.NOTION_PORTFOLIO as string;
   const data = await getData(id);
@@ -31,17 +45,3 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
-
-const Notion = dynamic(() => import('@/components/global/NotionRender'), { ssr: false });
-const Portfolio: NextPageWithLayout<Props> = ({ data, id }) => {
-  return (
-    <>
-      <Seo title={data.title} description={data.summary} />
-      <Notion recordMap={data.recordMap} id={id} />
-    </>
-  );
-};
-
-Portfolio.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;
-
-export default Portfolio;

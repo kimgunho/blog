@@ -19,18 +19,6 @@ interface Props {
   tags: TagType[];
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const db = await database();
-  const tags = await getTags();
-
-  return {
-    props: {
-      db,
-      tags,
-    },
-  };
-};
-
 const Tag = dynamic(() => import('@/components/ui/Tag'), { ssr: false });
 const Home: NextPageWithLayout<Props> = ({ db, tags }) => {
   const [posts, setPosts] = useState<DatabaseItemType[]>(db);
@@ -76,3 +64,15 @@ const Home: NextPageWithLayout<Props> = ({ db, tags }) => {
 Home.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const db = await database();
+  const tags = await getTags();
+
+  return {
+    props: {
+      db,
+      tags,
+    },
+  };
+};

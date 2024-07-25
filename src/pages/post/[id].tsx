@@ -16,6 +16,20 @@ interface Props {
   id: string;
 }
 
+const Notion = dynamic(() => import('@/components/global/NotionRender'), { ssr: false });
+const Detail: NextPageWithLayout<Props> = ({ data, id }) => {
+  return (
+    <>
+      <Seo title={data.title} description={data.summary} />
+      <Notion recordMap={data.recordMap} id={id} />
+    </>
+  );
+};
+
+Detail.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;
+
+export default Detail;
+
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const { params } = context;
   if (!params?.id) {
@@ -34,17 +48,3 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     },
   };
 };
-
-const Notion = dynamic(() => import('@/components/global/NotionRender'), { ssr: false });
-const Detail: NextPageWithLayout<Props> = ({ data, id }) => {
-  return (
-    <>
-      <Seo title={data.title} description={data.summary} />
-      <Notion recordMap={data.recordMap} id={id} />
-    </>
-  );
-};
-
-Detail.getLayout = (page) => <GlobalLayout>{page}</GlobalLayout>;
-
-export default Detail;

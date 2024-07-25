@@ -24,8 +24,8 @@ dd {
   margin-block-end: 0;
 }
 
-ul[role='list'],
-ol[role='list'] {
+ul,
+ol {
   list-style: none;
 }
 
@@ -54,10 +54,6 @@ h4 {
 a {
   text-decoration: none;
 }
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-  color: currentColor;
-}
 p {
   margin: 0;
 }
@@ -77,12 +73,4 @@ button {
   border: 0;
   cursor: pointer;
   background-color: transparent;
-}
-
-textarea:not([rows]) {
-  min-height: 10em;
-}
-
-:target {
-  scroll-margin-block: 5ex;
 }
