@@ -5,7 +5,6 @@ const CONFIG = {
   },
   paths: {
     about: '/about',
-    portfolio: '/portfolio',
     resume: '/resume',
   },
   git: {
