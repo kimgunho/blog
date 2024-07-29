@@ -1,6 +1,9 @@
 :root {
+  --color-main: #0b6e99;
   --color-background: white;
-  --color-background-revers: #2f3437;
+  --color-background-revers-00: #f1f3f4;
+  --color-background-revers-01: #2f3437;
+  --color-text-desc-revers: #999;
   --color-text-00: white;
   --color-text-01: #2f3437;
   --color-text-02: #333;
@@ -9,8 +12,11 @@
 }
 
 [data-theme='dark'] {
+  --color-main: #0b6e99;
   --color-background: #2f3437;
-  --color-background-revers: white;
+  --color-background-revers-00: #f1f3f4;
+  --color-background-revers-01: white;
+  --color-text-desc-revers: #999;
   --color-text-00: #2f3437;
   --color-text-01: white;
   --color-text-02: #f0f0f0;

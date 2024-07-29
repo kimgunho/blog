@@ -1,14 +1,21 @@
 .tag {
-  background-color: transparent;
+  background-color: var(--color-background-revers-01);
   border: 0;
   text-align: left;
   font-size: 1rem;
-  color: var(--color-text-02);
+  color: var(--color-text-00);
   text-transform: capitalize;
   cursor: pointer;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  min-width: 100px;
 
   &.active {
-    color: var(--color-text-01);
+    background-color: var(--color-main);
+    color: white;
     font-weight: 600;
   }
 }
