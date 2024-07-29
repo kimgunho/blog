@@ -3,13 +3,16 @@
   gap: 3.75rem;
   height: 100%;
 
-  > .tags {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem;
-    background-color: var(--color-background);
+  > .aside {
+    > .tags {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem;
+      background-color: var(--color-background);
+    }
   }
+
   > .contents {
     flex: 1;
     background-color: var(--color-background);

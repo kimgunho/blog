@@ -42,11 +42,13 @@ const Home: NextPageWithLayout<Props> = ({ db, tags }) => {
     <>
       <Seo title={CONFIG.header.title} description={CONFIG.header.description} />
       <div className={cx('container')}>
-        <aside className={cx('tags')}>
-          <Tag onClick={select} tag="all" active={curTag === 'all'} />
-          {tags.map((tag) => {
-            return <Tag key={tag.id} onClick={select} tag={tag.name} active={tag.name === curTag} />;
-          })}
+        <aside className={cx('aside')}>
+          <div className={cx('tags')}>
+            <Tag onClick={select} tag="all" active={curTag === 'all'} />
+            {tags.map((tag) => {
+              return <Tag key={tag.id} onClick={select} tag={tag.name} active={tag.name === curTag} />;
+            })}
+          </div>
         </aside>
         <div className={cx('contents')}>
           {posts.length === 0 && <p className={cx('empty')}>데이터가 존재하지않습니다.</p>}
